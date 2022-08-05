@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['user','guide','lead-guide','admin'],
+        enum: ['user','admin'],
         default: 'user'
     },
     password:{
@@ -44,6 +44,42 @@ const UserSchema = new mongoose.Schema({
     passwordResetExpires: Date
 });
 
+UserSchema.pre('save',async function(next) {
+
+    if(!this.isModified('password')) return next();
+
+    this.password = await bcrypt.hash(this.password,12);
+    this.passwordConfirm = undefined;
+    next();
+
+});
+
+UserSchema.methods.correctPassword = async function(candidatePassword,userPassword){
+
+    return await bcrypt.compare(candidatePassword,userPassword);
+}
+
+UserSchema.methods.changePasswordAfter = function(JWTTimestamp){
+
+    if(this.passwordChangedAt){
+        const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000,10);
+
+        return JWTTimestamp < changedTimestamp;
+    }
+
+    // False means NOT changed
+    return false;
+}
+
+UserSchema.pre('save',function(next){
+
+    if(!this.isModified('password') || this.isNew){
+        return next();
+    }
+
+    this.passwordChangedAt = Date.now() - 1000;
+    next();
+});
 
 const User = mongoose.model('User',UserSchema);
 

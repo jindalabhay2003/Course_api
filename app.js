@@ -3,10 +3,11 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
-const hpp = require('hpp');
 
 const AppError = require('./Utils/appError.js');
 const globalErrorHandler = require('./controllers/ErrorController');
+const courseRouter = require('./routes/courseRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -23,9 +24,15 @@ if (process.env.NODE_ENV === 'development') {
 // Body Parser, Reading Data from body
 app.use(express.json({ limit: '10kb' }));
 
+// Data Sanitization against NoSQL Query Injection
+app.use(mongoSanitize());
+
+// Data sanitization against xss
+app.use(xss());
+
 // 2) ROUTES
-
-
+app.use('/api/v1/course', courseRouter);
+app.use('/api/v1/users', userRouter);
 
 
 // After this If request and response cycle has not ended then
