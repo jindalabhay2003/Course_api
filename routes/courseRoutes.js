@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',authController.protect,courseController.getAllCourse);
 router.post('/',authController.protect,courseController.createCourse);
-router.patch('/',authController.protect,courseController.updateCourse);
+router.patch('/:id',authController.protect,courseController.updateCourse);
 
 router.get('/:id',authController.protect,courseController.getCourse);
 
