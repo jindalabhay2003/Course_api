@@ -2,15 +2,15 @@
 A simple API for getting , creating , deleting,updating Courses and all routes are authorised so if a user is logged in or have signed up then he have a json web token which 
 authorises his / her to access that courses routes. Every User has a role defined either user or admin so only admin can delete a course.
 
-#Routes Available
+# Endpoints Available
 
-- For User login Route  = {{URL}}api/v1/Users/login
-- For User signup Route = {{URL}}api/v1/users/signup
-- For getting all Courses = {{URL}}api/v1/course
-- For creating a course = {{URL}}api/v1/course
-- For updating a course = {{URL}}api/v1/course/:id
-- For deleting a course = {{URL}}api/v1/course/:id
-- For getting a single course = {{URL}}api/v1/course/:id
+- For User login   = api/v1/Users/login
+- For User signup  = api/v1/users/signup
+- For getting all Courses = api/v1/course
+- For creating a course = api/v1/course
+- For updating a course = api/v1/course/:id
+- For deleting a course = api/v1/course/:id
+- For getting a single course = api/v1/course/:id
 
 ## Technologies Used
 
