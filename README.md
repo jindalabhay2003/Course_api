@@ -1,6 +1,7 @@
 # Course_api
 A simple API for getting , creating , deleting,updating Courses and all routes are authorised so if a user is logged in or have signed up then he have a json web token which 
 authorises his / her to access that courses routes. Every User has a role defined either user or admin so only admin can delete a course.
+In Getting all the users we can query for sorting,pagination,filtering,limitng fields and many other features
 
 # Endpoints Available
 
