@@ -4,7 +4,7 @@ authorises his / her to access that courses routes. Every User has a role define
 
 # Endpoints Available
 
-- For User login   = api/v1/Users/login
+- For User login   = api/v1/users/login
 - For User signup  = api/v1/users/signup
 - For getting all Courses = api/v1/course
 - For creating a course = api/v1/course
